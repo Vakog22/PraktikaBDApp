@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Авторизация" Height="500" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
     <Grid>
-        <Image Source="C:\Users\Practice.OP9_WinDC.005\source\repos\VlasProg\VlasProg\Res\Background.jpg"
+        <Image Source="C:\Users\Practice.OP9_WinDC.005\source\repos\PraktikaBDApp\VlasProg\Res\Background.jpg"
                Stretch="Fill"/>
         <StackPanel HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"

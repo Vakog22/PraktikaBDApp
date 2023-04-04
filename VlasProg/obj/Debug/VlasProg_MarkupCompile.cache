@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Practice.OP9_WinDC.005\source\repos\VlasProg\VlasProg\obj\Debug\
+C:\Users\Practice.OP9_WinDC.005\source\repos\PraktikaBDApp\VlasProg\obj\Debug\
 VlasProg
 none
 false
 DEBUG;TRACE
-C:\Users\Practice.OP9_WinDC.005\source\repos\VlasProg\VlasProg\App.xaml
+C:\Users\Practice.OP9_WinDC.005\source\repos\PraktikaBDApp\VlasProg\App.xaml
 13-1340581026
 21750853300
 3487036070
-18-26486497
+18-1803091420
 AddingWindows\AddOrderResWindow.xaml;AddingWindows\AddPrderProdWindow.xaml;AddingWindows\AddUserWindow.xaml;AuthWindow.xaml;PersonalCabinetWindow.xaml;SelectWindow.xaml;TableWindows\AuthorizationWindow.xaml;TableWindows\AvalibleResourcesWindow.xaml;TableWindows\OrderProd.xaml;TableWindows\OrderRes.xaml;TableWindows\ProductWindow.xaml;TableWindows\ResourceWindow.xaml;TableWindows\SupplierWindow.xaml;
 
 False
