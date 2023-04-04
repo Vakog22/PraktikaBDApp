@@ -1,0 +1,85 @@
+﻿<Window x:Class="VlasProg.AuthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VlasProg"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="500" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+    <Grid>
+        <Image Source="C:\Users\Practice.OP9_WinDC.005\source\repos\VlasProg\VlasProg\Res\Background.jpg"
+               Stretch="Fill"/>
+        <StackPanel HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Width="450"
+                Height="450"
+                Background="{x:Null}">
+
+            <TextBlock Text="Авторизация"
+                   FontSize="30"
+                   Margin=" 30 25 30 -10"
+                   HorizontalAlignment="Center"
+                   Foreground="White"/>
+
+            <TextBlock Text="Введите логин"
+                   FontSize="20"
+                   FontWeight="UltraLight"
+                   Margin=" 30 50 30 0"
+                   HorizontalAlignment="Left"
+                   Foreground="White"/>
+
+            <TextBox x:Name="TbLogin"
+                 Height="24"
+                 Margin="30 0 30 0"
+                 Text="admin"
+                 Background="{x:Null}"
+                 BorderBrush="{x:Null}"
+                     Foreground="White">
+            </TextBox>
+
+            <TextBlock Text="Введите пароль"
+                   FontSize="20"
+                   FontWeight="UltraLight"
+                   Margin=" 30 25 30 0"
+                   HorizontalAlignment="Left"
+                       Foreground="White"/>
+
+            <PasswordBox x:Name="PbPassword"
+                 Height="24"
+                 Margin="30 0 30 0"
+                     Password="admin"
+                     Background="{x:Null}"
+                 BorderBrush="{x:Null}"
+                     Foreground="White"/>
+
+            <Border BorderThickness="0" BorderBrush="Black" Margin="30">
+                <StackPanel>
+                    <TextBlock Height="48"
+                 TextAlignment="Center"
+                           FontSize="36"
+                          TextDecorations="Strikethrough"
+                           FontFamily="Comic Sans MS"
+                           x:Name="TB_Captcha"
+                           Background="{x:Null}"
+                     Foreground="White"/>
+                    <TextBox Height="24"
+                     Text="Капча"
+                         x:Name="TBX_Captcha"
+                         Background="{x:Null}"
+                 BorderBrush="{x:Null}"
+                     Foreground="White"/>
+                </StackPanel>
+            </Border>
+
+            <Button x:Name="BtnLogin"
+                Content="Войти"
+                Margin="30 20 30 0"
+                Height="30"
+                Click="BtnLogin_Click"
+                Background="{x:Null}"
+                 BorderBrush="{x:Null}"
+                     Foreground="White"/>
+        </StackPanel>
+    </Grid>
+    
+</Window>

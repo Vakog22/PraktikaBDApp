@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="537e4124531642a8b96f47440405eb4f" Name="Diagram1" ZoomLevel="125">
+        <EntityTypeShape EntityType="FactoryModel.AccountType" Width="1.5" PointX="7.75" PointY="1.25" />
+        <EntityTypeShape EntityType="FactoryModel.Auth" Width="1.5" PointX="10" PointY="0.875" />
+        <EntityTypeShape EntityType="FactoryModel.AvalibleResources" Width="1.5" PointX="5.25" PointY="8" />
+        <EntityTypeShape EntityType="FactoryModel.OrderProd" Width="1.5" PointX="5.25" PointY="10.875" />
+        <EntityTypeShape EntityType="FactoryModel.OrderRes" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="FactoryModel.ProdCategory" Width="1.5" PointX="0.75" PointY="8.25" />
+        <EntityTypeShape EntityType="FactoryModel.Product" Width="1.5" PointX="3" PointY="7.875" />
+        <EntityTypeShape EntityType="FactoryModel.ResCategory" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="FactoryModel.Resource" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="FactoryModel.ResourceProduct" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="FactoryModel.Supplier" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="FactoryModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="FactoryModel.User" Width="1.5" PointX="12.25" PointY="1.125" />
+        <AssociationConnector Association="FactoryModel.FK_Auth_AccountType" />
+        <AssociationConnector Association="FactoryModel.FK_User_Auth" />
+        <AssociationConnector Association="FactoryModel.FK_AvalibleResources_Resource" />
+        <AssociationConnector Association="FactoryModel.FK_OrderProd_Product" />
+        <AssociationConnector Association="FactoryModel.FK_OrderRes_Resource" />
+        <AssociationConnector Association="FactoryModel.FK_OrderRes_Supplier" />
+        <AssociationConnector Association="FactoryModel.FK__Product__IDCateg__5AEE82B9" />
+        <AssociationConnector Association="FactoryModel.FK__ResourceP__IDPro__7D439ABD" />
+        <AssociationConnector Association="FactoryModel.FK__Resource__IDCate__5535A963" />
+        <AssociationConnector Association="FactoryModel.FK__Resource__IDSupp__5629CD9C" />
+        <AssociationConnector Association="FactoryModel.FK_ResourceProduct_Resource" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

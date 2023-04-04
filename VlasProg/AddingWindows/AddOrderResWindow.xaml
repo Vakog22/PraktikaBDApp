@@ -1,0 +1,20 @@
+﻿<Window x:Class="VlasProg.AddingWindows.AddOrderResWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VlasProg.AddingWindows"
+        mc:Ignorable="d"
+        Title="Добавление заказа на ресурсы" Height="450" Width="400"  WindowStartupLocation="CenterScreen">
+    <Grid Background="#FFFFC36A">
+        <StackPanel>
+            <TextBlock Text="Ресурс" Margin="10,10,10,10"/>
+            <ComboBox x:Name="CBResource" Margin="10,0,10,10" Background="#FFFBD49B"/>
+            <TextBlock Text="Кол-во" Margin="10,10,10,10"/>
+            <TextBox x:Name="Quantity" Margin="10,0,10,10" Background="#FFFBD49B"/>
+            <TextBlock Text="Поставщик" Margin="10,10,10,10"/>
+            <ComboBox x:Name="CBSupplier" Margin="10,0,10,10" Background="#FFFBD49B" SelectionChanged="CBSupplier_SelectionChanged"/>
+            <Button x:Name="BTN_SAVE" Content="Добавить" HorizontalAlignment="Center" Click="BTN_SAVE_Click" Background="#FFFBD49B"/>
+        </StackPanel>
+    </Grid>
+</Window>

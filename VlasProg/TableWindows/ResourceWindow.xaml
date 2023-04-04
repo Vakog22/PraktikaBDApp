@@ -1,0 +1,36 @@
+﻿<Window x:Class="VlasProg.TableWindows.ResourceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VlasProg.TableWindows"
+        mc:Ignorable="d"
+        Title="Ресурсы" Height="450" Width="600">
+    <Grid>
+        <StackPanel Background="#FFFFC36A">
+            <DataGrid x:Name="DG"
+                  ItemsSource="{Binding}"
+                      AutoGenerateColumns="False"
+                      Height="350" BorderBrush="{x:Null}" Foreground="Black"
+                      VerticalScrollBarVisibility="Visible"
+                      >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID"
+                            Binding="{Binding Path=ID}" />
+                    <DataGridTextColumn Header="Название ресурса"
+                            Binding="{Binding Path=Name}" />
+                    <DataGridTextColumn Header="Описание"
+                            Binding="{Binding Path=Description}" />
+                    <DataGridTextColumn Header="Категория"
+                            Binding="{Binding Path=ResCategory.Title}" />
+                    <DataGridTextColumn Header="Поставщик"
+                            Binding="{Binding Path=Supplier.Name}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <WrapPanel Height="50" Background="#FFFFC36A">
+                <Button Margin="10" Height="30" Width="100" Content="Сохранить" Click="Button_Click" Background="#FFFBD49B"/>
+            </WrapPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>

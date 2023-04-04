@@ -1,0 +1,796 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище FactoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="IdType" />
+          </Key>
+          <Property Name="IdType" Type="int" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Auth">
+          <Key>
+            <PropertyRef Name="IdLogin" />
+          </Key>
+          <Property Name="IdLogin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AvalibleResources">
+          <Key>
+            <PropertyRef Name="IDResouce" />
+          </Key>
+          <Property Name="IDResouce" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderProd">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IsDone" Type="bit" Nullable="false" />
+          <Property Name="IDProduct" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderRes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IsDone" Type="bit" Nullable="false" />
+          <Property Name="IDResource" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="IDSupplier" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProdCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="IDCategory" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ResCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCategory" Type="int" />
+          <Property Name="IDSupplier" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ResourceProduct">
+          <Key>
+            <PropertyRef Name="IDResource" />
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDResource" Type="int" Nullable="false" />
+          <Property Name="IDProduct" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdLogin" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Product__IDCateg__5AEE82B9">
+          <End Role="ProdCategory" Type="Self.ProdCategory" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProdCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resource__IDCate__5535A963">
+          <End Role="ResCategory" Type="Self.ResCategory" Multiplicity="0..1" />
+          <End Role="Resource" Type="Self.Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Resource">
+              <PropertyRef Name="IDCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resource__IDSupp__5629CD9C">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="Resource" Type="Self.Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Resource">
+              <PropertyRef Name="IDSupplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ResourceP__IDPro__7D439ABD">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ResourceProduct" Type="Self.ResourceProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ResourceProduct">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Auth_AccountType">
+          <End Role="AccountType" Type="Self.AccountType" Multiplicity="1" />
+          <End Role="Auth" Type="Self.Auth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountType">
+              <PropertyRef Name="IdType" />
+            </Principal>
+            <Dependent Role="Auth">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AvalibleResources_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="AvalibleResources" Type="Self.AvalibleResources" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AvalibleResources">
+              <PropertyRef Name="IDResouce" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProd_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="OrderProd" Type="Self.OrderProd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderProd">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderRes_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="OrderRes" Type="Self.OrderRes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderRes">
+              <PropertyRef Name="IDResource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderRes_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="OrderRes" Type="Self.OrderRes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderRes">
+              <PropertyRef Name="IDSupplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResourceProduct_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="ResourceProduct" Type="Self.ResourceProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ResourceProduct">
+              <PropertyRef Name="IDResource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Auth">
+          <End Role="Auth" Type="Self.Auth" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auth">
+              <PropertyRef Name="IdLogin" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdLogin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище FactoryModelContainer">
+          <EntitySet Name="AccountType" EntityType="Self.AccountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Auth" EntityType="Self.Auth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AvalibleResources" EntityType="Self.AvalibleResources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderProd" EntityType="Self.OrderProd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderRes" EntityType="Self.OrderRes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProdCategory" EntityType="Self.ProdCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResCategory" EntityType="Self.ResCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResourceProduct" EntityType="Self.ResourceProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Product__IDCateg__5AEE82B9" Association="Self.FK__Product__IDCateg__5AEE82B9">
+            <End Role="ProdCategory" EntitySet="ProdCategory" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resource__IDCate__5535A963" Association="Self.FK__Resource__IDCate__5535A963">
+            <End Role="ResCategory" EntitySet="ResCategory" />
+            <End Role="Resource" EntitySet="Resource" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resource__IDSupp__5629CD9C" Association="Self.FK__Resource__IDSupp__5629CD9C">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Resource" EntitySet="Resource" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ResourceP__IDPro__7D439ABD" Association="Self.FK__ResourceP__IDPro__7D439ABD">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ResourceProduct" EntitySet="ResourceProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Auth_AccountType" Association="Self.FK_Auth_AccountType">
+            <End Role="AccountType" EntitySet="AccountType" />
+            <End Role="Auth" EntitySet="Auth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AvalibleResources_Resource" Association="Self.FK_AvalibleResources_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="AvalibleResources" EntitySet="AvalibleResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProd_Product" Association="Self.FK_OrderProd_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderProd" EntitySet="OrderProd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderRes_Resource" Association="Self.FK_OrderRes_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="OrderRes" EntitySet="OrderRes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderRes_Supplier" Association="Self.FK_OrderRes_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="OrderRes" EntitySet="OrderRes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResourceProduct_Resource" Association="Self.FK_ResourceProduct_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ResourceProduct" EntitySet="ResourceProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Auth" Association="Self.FK_User_Auth">
+            <End Role="Auth" EntitySet="Auth" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FactoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FactoryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountType" EntityType="FactoryModel.AccountType" />
+          <EntitySet Name="Auth" EntityType="FactoryModel.Auth" />
+          <EntitySet Name="AvalibleResources" EntityType="FactoryModel.AvalibleResources" />
+          <EntitySet Name="OrderProd" EntityType="FactoryModel.OrderProd" />
+          <EntitySet Name="OrderRes" EntityType="FactoryModel.OrderRes" />
+          <EntitySet Name="ProdCategory" EntityType="FactoryModel.ProdCategory" />
+          <EntitySet Name="Product" EntityType="FactoryModel.Product" />
+          <EntitySet Name="ResCategory" EntityType="FactoryModel.ResCategory" />
+          <EntitySet Name="Resource" EntityType="FactoryModel.Resource" />
+          <EntitySet Name="ResourceProduct" EntityType="FactoryModel.ResourceProduct" />
+          <EntitySet Name="Supplier" EntityType="FactoryModel.Supplier" />
+          <EntitySet Name="sysdiagrams" EntityType="FactoryModel.sysdiagrams" />
+          <EntitySet Name="User" EntityType="FactoryModel.User" />
+          <AssociationSet Name="FK_Auth_AccountType" Association="FactoryModel.FK_Auth_AccountType">
+            <End Role="AccountType" EntitySet="AccountType" />
+            <End Role="Auth" EntitySet="Auth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Auth" Association="FactoryModel.FK_User_Auth">
+            <End Role="Auth" EntitySet="Auth" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AvalibleResources_Resource" Association="FactoryModel.FK_AvalibleResources_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="AvalibleResources" EntitySet="AvalibleResources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProd_Product" Association="FactoryModel.FK_OrderProd_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderProd" EntitySet="OrderProd" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderRes_Resource" Association="FactoryModel.FK_OrderRes_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="OrderRes" EntitySet="OrderRes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderRes_Supplier" Association="FactoryModel.FK_OrderRes_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="OrderRes" EntitySet="OrderRes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IDCateg__5AEE82B9" Association="FactoryModel.FK__Product__IDCateg__5AEE82B9">
+            <End Role="ProdCategory" EntitySet="ProdCategory" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ResourceP__IDPro__7D439ABD" Association="FactoryModel.FK__ResourceP__IDPro__7D439ABD">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ResourceProduct" EntitySet="ResourceProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resource__IDCate__5535A963" Association="FactoryModel.FK__Resource__IDCate__5535A963">
+            <End Role="ResCategory" EntitySet="ResCategory" />
+            <End Role="Resource" EntitySet="Resource" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resource__IDSupp__5629CD9C" Association="FactoryModel.FK__Resource__IDSupp__5629CD9C">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Resource" EntitySet="Resource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResourceProduct_Resource" Association="FactoryModel.FK_ResourceProduct_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ResourceProduct" EntitySet="ResourceProduct" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AccountType">
+          <Key>
+            <PropertyRef Name="IdType" />
+          </Key>
+          <Property Name="IdType" Type="Int32" Nullable="false" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Auth" Relationship="FactoryModel.FK_Auth_AccountType" FromRole="AccountType" ToRole="Auth" />
+        </EntityType>
+        <EntityType Name="Auth">
+          <Key>
+            <PropertyRef Name="IdLogin" />
+          </Key>
+          <Property Name="IdLogin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountType" Relationship="FactoryModel.FK_Auth_AccountType" FromRole="Auth" ToRole="AccountType" />
+          <NavigationProperty Name="User" Relationship="FactoryModel.FK_User_Auth" FromRole="Auth" ToRole="User" />
+        </EntityType>
+        <EntityType Name="AvalibleResources">
+          <Key>
+            <PropertyRef Name="IDResouce" />
+          </Key>
+          <Property Name="IDResouce" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Resource" Relationship="FactoryModel.FK_AvalibleResources_Resource" FromRole="AvalibleResources" ToRole="Resource" />
+        </EntityType>
+        <EntityType Name="OrderProd">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsDone" Type="Boolean" Nullable="false" />
+          <Property Name="IDProduct" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="FactoryModel.FK_OrderProd_Product" FromRole="OrderProd" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="OrderRes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsDone" Type="Boolean" Nullable="false" />
+          <Property Name="IDResource" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="IDSupplier" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Resource" Relationship="FactoryModel.FK_OrderRes_Resource" FromRole="OrderRes" ToRole="Resource" />
+          <NavigationProperty Name="Supplier" Relationship="FactoryModel.FK_OrderRes_Supplier" FromRole="OrderRes" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="ProdCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="FactoryModel.FK__Product__IDCateg__5AEE82B9" FromRole="ProdCategory" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="IDCategory" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderProd" Relationship="FactoryModel.FK_OrderProd_Product" FromRole="Product" ToRole="OrderProd" />
+          <NavigationProperty Name="ProdCategory" Relationship="FactoryModel.FK__Product__IDCateg__5AEE82B9" FromRole="Product" ToRole="ProdCategory" />
+          <NavigationProperty Name="ResourceProduct" Relationship="FactoryModel.FK__ResourceP__IDPro__7D439ABD" FromRole="Product" ToRole="ResourceProduct" />
+        </EntityType>
+        <EntityType Name="ResCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Resource" Relationship="FactoryModel.FK__Resource__IDCate__5535A963" FromRole="ResCategory" ToRole="Resource" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCategory" Type="Int32" />
+          <Property Name="IDSupplier" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AvalibleResources" Relationship="FactoryModel.FK_AvalibleResources_Resource" FromRole="Resource" ToRole="AvalibleResources" />
+          <NavigationProperty Name="OrderRes" Relationship="FactoryModel.FK_OrderRes_Resource" FromRole="Resource" ToRole="OrderRes" />
+          <NavigationProperty Name="ResCategory" Relationship="FactoryModel.FK__Resource__IDCate__5535A963" FromRole="Resource" ToRole="ResCategory" />
+          <NavigationProperty Name="Supplier" Relationship="FactoryModel.FK__Resource__IDSupp__5629CD9C" FromRole="Resource" ToRole="Supplier" />
+          <NavigationProperty Name="ResourceProduct" Relationship="FactoryModel.FK_ResourceProduct_Resource" FromRole="Resource" ToRole="ResourceProduct" />
+        </EntityType>
+        <EntityType Name="ResourceProduct">
+          <Key>
+            <PropertyRef Name="IDResource" />
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDResource" Type="Int32" Nullable="false" />
+          <Property Name="IDProduct" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="FactoryModel.FK__ResourceP__IDPro__7D439ABD" FromRole="ResourceProduct" ToRole="Product" />
+          <NavigationProperty Name="Resource" Relationship="FactoryModel.FK_ResourceProduct_Resource" FromRole="ResourceProduct" ToRole="Resource" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderRes" Relationship="FactoryModel.FK_OrderRes_Supplier" FromRole="Supplier" ToRole="OrderRes" />
+          <NavigationProperty Name="Resource" Relationship="FactoryModel.FK__Resource__IDSupp__5629CD9C" FromRole="Supplier" ToRole="Resource" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdLogin" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Auth" Relationship="FactoryModel.FK_User_Auth" FromRole="User" ToRole="Auth" />
+        </EntityType>
+        <Association Name="FK_Auth_AccountType">
+          <End Type="FactoryModel.AccountType" Role="AccountType" Multiplicity="1" />
+          <End Type="FactoryModel.Auth" Role="Auth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountType">
+              <PropertyRef Name="IdType" />
+            </Principal>
+            <Dependent Role="Auth">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Auth">
+          <End Type="FactoryModel.Auth" Role="Auth" Multiplicity="1" />
+          <End Type="FactoryModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auth">
+              <PropertyRef Name="IdLogin" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdLogin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AvalibleResources_Resource">
+          <End Type="FactoryModel.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="FactoryModel.AvalibleResources" Role="AvalibleResources" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AvalibleResources">
+              <PropertyRef Name="IDResouce" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProd_Product">
+          <End Type="FactoryModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="FactoryModel.OrderProd" Role="OrderProd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderProd">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderRes_Resource">
+          <End Type="FactoryModel.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="FactoryModel.OrderRes" Role="OrderRes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderRes">
+              <PropertyRef Name="IDResource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderRes_Supplier">
+          <End Type="FactoryModel.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="FactoryModel.OrderRes" Role="OrderRes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderRes">
+              <PropertyRef Name="IDSupplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IDCateg__5AEE82B9">
+          <End Type="FactoryModel.ProdCategory" Role="ProdCategory" Multiplicity="0..1" />
+          <End Type="FactoryModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProdCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ResourceP__IDPro__7D439ABD">
+          <End Type="FactoryModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="FactoryModel.ResourceProduct" Role="ResourceProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ResourceProduct">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resource__IDCate__5535A963">
+          <End Type="FactoryModel.ResCategory" Role="ResCategory" Multiplicity="0..1" />
+          <End Type="FactoryModel.Resource" Role="Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResCategory">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Resource">
+              <PropertyRef Name="IDCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resource__IDSupp__5629CD9C">
+          <End Type="FactoryModel.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="FactoryModel.Resource" Role="Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Resource">
+              <PropertyRef Name="IDSupplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResourceProduct_Resource">
+          <End Type="FactoryModel.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="FactoryModel.ResourceProduct" Role="ResourceProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ResourceProduct">
+              <PropertyRef Name="IDResource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище FactoryModelContainer" CdmEntityContainer="FactoryEntities">
+          <EntitySetMapping Name="AccountType">
+            <EntityTypeMapping TypeName="FactoryModel.AccountType">
+              <MappingFragment StoreEntitySet="AccountType">
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Auth">
+            <EntityTypeMapping TypeName="FactoryModel.Auth">
+              <MappingFragment StoreEntitySet="Auth">
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="IdLogin" ColumnName="IdLogin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AvalibleResources">
+            <EntityTypeMapping TypeName="FactoryModel.AvalibleResources">
+              <MappingFragment StoreEntitySet="AvalibleResources">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IDResouce" ColumnName="IDResouce" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderProd">
+            <EntityTypeMapping TypeName="FactoryModel.OrderProd">
+              <MappingFragment StoreEntitySet="OrderProd">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="IsDone" ColumnName="IsDone" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderRes">
+            <EntityTypeMapping TypeName="FactoryModel.OrderRes">
+              <MappingFragment StoreEntitySet="OrderRes">
+                <ScalarProperty Name="IDSupplier" ColumnName="IDSupplier" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IDResource" ColumnName="IDResource" />
+                <ScalarProperty Name="IsDone" ColumnName="IsDone" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProdCategory">
+            <EntityTypeMapping TypeName="FactoryModel.ProdCategory">
+              <MappingFragment StoreEntitySet="ProdCategory">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="FactoryModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResCategory">
+            <EntityTypeMapping TypeName="FactoryModel.ResCategory">
+              <MappingFragment StoreEntitySet="ResCategory">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resource">
+            <EntityTypeMapping TypeName="FactoryModel.Resource">
+              <MappingFragment StoreEntitySet="Resource">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDSupplier" ColumnName="IDSupplier" />
+                <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResourceProduct">
+            <EntityTypeMapping TypeName="FactoryModel.ResourceProduct">
+              <MappingFragment StoreEntitySet="ResourceProduct">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="IDResource" ColumnName="IDResource" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplier">
+            <EntityTypeMapping TypeName="FactoryModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FactoryModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="FactoryModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="IdLogin" ColumnName="IdLogin" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

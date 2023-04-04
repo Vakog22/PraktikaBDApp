@@ -1,0 +1,84 @@
+﻿<Window x:Class="VlasProg.SelectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VlasProg"
+        mc:Ignorable="d"
+        Title="SelectWindow" Height="450" Width="400" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button x:Name="BTN_EXIT" Content="Выйти" VerticalAlignment="Bottom" Panel.ZIndex="1" HorizontalAlignment="Left" Margin="10" Click="BTN_EXIT_Click" Background="#FFFFBB59" BorderBrush="{x:Null}"/>
+        <StackPanel Background="#FFFFC36A">
+            <TextBlock x:Name="TB_Welcome"
+                       Foreground="White"
+                       FontSize="20"
+                       TextAlignment="Center"/>
+            <Button x:Name="BTN_Cabinet"
+                    Height="24"
+                    Content="Личный кабинет"
+                    Width="120"
+                    Margin="5"
+                    Background="#FFFFBB59"
+                    BorderBrush="{x:Null}"
+                    Click="BTN_Cabinet_Click"/>
+
+            <Button x:Name="BTN_OrderProd"
+                    Height="24"
+                    Content="Заказы на продукты"
+                    Width="120"
+                    Margin="10"
+                    Background="#FFFBD49B"
+                    BorderBrush="{x:Null}"
+                    Click="BTN_OrderProd_Click"/>
+            <Button x:Name="BTN_Supplier1"
+                    Height="24"
+                    Content="Заказы на ресурсы"
+                    Width="120"
+                    Margin="10"
+                    Background="#FFFBD49B"
+                    BorderBrush="{x:Null}"
+                    Click="BTN_Supplier_Click_1"/>
+
+            <Button x:Name="BTN_AvaliableResources"
+                    Height="24"
+                    Content="Доступные ресурсы"
+                    Width="120"
+                    Margin="10"
+                    Background="#FFFBD49B"
+                    BorderBrush="{x:Null}"
+                    Click="BTN_AvaliableResources_Click"/>
+            <Button x:Name="BTN_Resource"
+                    Height="24"
+                    Content="Список ресурсов"
+                    Width="120"
+                    Margin="10"
+                    Background="#FFFBD49B"
+                    BorderBrush="{x:Null}"
+                    Click="BTN_Resource_Click"/>
+            <Button x:Name="BTN_Supplier"
+                    Height="24"
+                    Content="Поставщики"
+                    Width="120"
+                    Margin="10"
+                    Background="#FFFBD49B"
+                    BorderBrush="{x:Null}"
+                    Click="BTN_Supplier_Click"/>
+            <Button x:Name="BTN_Product"
+                    Height="24"
+                    Content="Продукты"
+                    Width="120"
+                    Margin="10"
+                    Background="#FFFBD49B"
+                    BorderBrush="{x:Null}"
+                    Click="BTN_Product_Click"/>
+            <Button x:Name="BTN_Auth"
+                    Height="24"
+                    Content="Учётные записи"
+                    Width="120"
+                    Margin="10"
+                    Background="#FFFBD49B"
+                    BorderBrush="{x:Null}"
+                    Click="BTN_Auth_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

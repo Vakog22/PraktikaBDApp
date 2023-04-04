@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FactoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <ComplexType Name="GetNeededResources_Result">
+    <Property Name="IDResource" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Int32" />
+  </ComplexType>
+  <EntityType Name="AvalibleResources">
+    <Key>
+      <PropertyRef Name="IDResouce" />
+    </Key>
+    <Property Name="IDResouce" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Resource" Relationship="Self.FK_AvalibleResources_Resource" FromRole="AvalibleResources" ToRole="Resource" />
+  </EntityType>
+  <EntityType Name="OrderProd">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IsDone" Type="Boolean" Nullable="false" />
+    <Property Name="IDProduct" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_OrderProd_Product" FromRole="OrderProd" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="OrderRes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IsDone" Type="Boolean" Nullable="false" />
+    <Property Name="IDResource" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="IDSupplier" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Resource" Relationship="Self.FK_OrderRes_Resource" FromRole="OrderRes" ToRole="Resource" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK_OrderRes_Supplier" FromRole="OrderRes" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="ProdCategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Product__IDCateg__5AEE82B9" FromRole="ProdCategory" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="IDCategory" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OrderProd" Relationship="Self.FK_OrderProd_Product" FromRole="Product" ToRole="OrderProd" />
+    <NavigationProperty Name="ProdCategory" Relationship="Self.FK__Product__IDCateg__5AEE82B9" FromRole="Product" ToRole="ProdCategory" />
+    <NavigationProperty Name="ResourceProduct" Relationship="Self.FK__ResourceP__IDPro__7D439ABD" FromRole="Product" ToRole="ResourceProduct" />
+  </EntityType>
+  <EntityType Name="ResCategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Resource" Relationship="Self.FK__Resource__IDCate__5535A963" FromRole="ResCategory" ToRole="Resource" />
+  </EntityType>
+  <EntityType Name="Resource">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="IDCategory" Type="Int32" />
+    <Property Name="IDSupplier" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AvalibleResources" Relationship="Self.FK_AvalibleResources_Resource" FromRole="Resource" ToRole="AvalibleResources" />
+    <NavigationProperty Name="OrderRes" Relationship="Self.FK_OrderRes_Resource" FromRole="Resource" ToRole="OrderRes" />
+    <NavigationProperty Name="ResCategory" Relationship="Self.FK__Resource__IDCate__5535A963" FromRole="Resource" ToRole="ResCategory" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK__Resource__IDSupp__5629CD9C" FromRole="Resource" ToRole="Supplier" />
+    <NavigationProperty Name="ResourceProduct" Relationship="Self.FK_ResourceProduct_Resource" FromRole="Resource" ToRole="ResourceProduct" />
+  </EntityType>
+  <EntityType Name="ResourceProduct">
+    <Key>
+      <PropertyRef Name="IDResource" />
+      <PropertyRef Name="IDProduct" />
+    </Key>
+    <Property Name="IDResource" Type="Int32" Nullable="false" />
+    <Property Name="IDProduct" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__ResourceP__IDPro__7D439ABD" FromRole="ResourceProduct" ToRole="Product" />
+    <NavigationProperty Name="Resource" Relationship="Self.FK_ResourceProduct_Resource" FromRole="ResourceProduct" ToRole="Resource" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OrderRes" Relationship="Self.FK_OrderRes_Supplier" FromRole="Supplier" ToRole="OrderRes" />
+    <NavigationProperty Name="Resource" Relationship="Self.FK__Resource__IDSupp__5629CD9C" FromRole="Supplier" ToRole="Resource" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_AvalibleResources_Resource">
+    <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+    <End Role="AvalibleResources" Type="Self.AvalibleResources" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Resource">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AvalibleResources">
+        <PropertyRef Name="IDResouce" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderProd_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="OrderProd" Type="Self.OrderProd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderProd">
+        <PropertyRef Name="IDProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderRes_Resource">
+    <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+    <End Role="OrderRes" Type="Self.OrderRes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderRes">
+        <PropertyRef Name="IDResource" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderRes_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="OrderRes" Type="Self.OrderRes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderRes">
+        <PropertyRef Name="IDSupplier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__IDCateg__5AEE82B9">
+    <End Role="ProdCategory" Type="Self.ProdCategory" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProdCategory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="IDCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ResourceP__IDPro__7D439ABD">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="ResourceProduct" Type="Self.ResourceProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ResourceProduct">
+        <PropertyRef Name="IDProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Resource__IDCate__5535A963">
+    <End Role="ResCategory" Type="Self.ResCategory" Multiplicity="0..1" />
+    <End Role="Resource" Type="Self.Resource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ResCategory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Resource">
+        <PropertyRef Name="IDCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Resource__IDSupp__5629CD9C">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="Resource" Type="Self.Resource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Resource">
+        <PropertyRef Name="IDSupplier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ResourceProduct_Resource">
+    <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+    <End Role="ResourceProduct" Type="Self.ResourceProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ResourceProduct">
+        <PropertyRef Name="IDResource" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AvalibleResources" EntityType="Self.AvalibleResources" />
+    <EntitySet Name="OrderProd" EntityType="Self.OrderProd" />
+    <EntitySet Name="OrderRes" EntityType="Self.OrderRes" />
+    <EntitySet Name="ProdCategory" EntityType="Self.ProdCategory" />
+    <EntitySet Name="Product" EntityType="Self.Product" />
+    <EntitySet Name="ResCategory" EntityType="Self.ResCategory" />
+    <EntitySet Name="Resource" EntityType="Self.Resource" />
+    <EntitySet Name="ResourceProduct" EntityType="Self.ResourceProduct" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_AvalibleResources_Resource" Association="Self.FK_AvalibleResources_Resource">
+      <End Role="Resource" EntitySet="Resource" />
+      <End Role="AvalibleResources" EntitySet="AvalibleResources" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderProd_Product" Association="Self.FK_OrderProd_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OrderProd" EntitySet="OrderProd" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderRes_Resource" Association="Self.FK_OrderRes_Resource">
+      <End Role="Resource" EntitySet="Resource" />
+      <End Role="OrderRes" EntitySet="OrderRes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderRes_Supplier" Association="Self.FK_OrderRes_Supplier">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="OrderRes" EntitySet="OrderRes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__IDCateg__5AEE82B9" Association="Self.FK__Product__IDCateg__5AEE82B9">
+      <End Role="ProdCategory" EntitySet="ProdCategory" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ResourceP__IDPro__7D439ABD" Association="Self.FK__ResourceP__IDPro__7D439ABD">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ResourceProduct" EntitySet="ResourceProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Resource__IDCate__5535A963" Association="Self.FK__Resource__IDCate__5535A963">
+      <End Role="ResCategory" EntitySet="ResCategory" />
+      <End Role="Resource" EntitySet="Resource" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Resource__IDSupp__5629CD9C" Association="Self.FK__Resource__IDSupp__5629CD9C">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="Resource" EntitySet="Resource" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ResourceProduct_Resource" Association="Self.FK_ResourceProduct_Resource">
+      <End Role="Resource" EntitySet="Resource" />
+      <End Role="ResourceProduct" EntitySet="ResourceProduct" />
+    </AssociationSet>
+    <FunctionImport Name="GetNeededResources" IsComposable="true" ReturnType="Collection(FactoryModel.GetNeededResources_Result)">
+      <Parameter Name="IdOrder" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Auth" EntityType="FactoryModel.Auth" />
+    <EntitySet Name="User" EntityType="FactoryModel.User" />
+    <AssociationSet Name="FK_User_Auth" Association="FactoryModel.FK_User_Auth">
+      <End Role="Auth" EntitySet="Auth" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Auth">
+    <Key>
+      <PropertyRef Name="IdLogin" />
+    </Key>
+    <Property Name="IdLogin" Type="Int32" Nullable="false" />
+    <Property Name="Login" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="FactoryModel.FK_User_Auth" FromRole="Auth" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="IdUser" Type="Int32" Nullable="false" />
+    <Property Name="IdLogin" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Auth" Relationship="FactoryModel.FK_User_Auth" FromRole="User" ToRole="Auth" />
+  </EntityType>
+  <Association Name="FK_User_Auth">
+    <End Type="FactoryModel.Auth" Role="Auth" Multiplicity="1" />
+    <End Type="FactoryModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Auth">
+        <PropertyRef Name="IdLogin" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="IdLogin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
