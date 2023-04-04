@@ -16,7 +16,7 @@
                   ItemsSource="{Binding}"
                       AutoGenerateColumns="False"
                       Height="350" BorderBrush="{x:Null}" Foreground="Black"
-                      VerticalScrollBarVisibility="Visible">
+                      VerticalScrollBarVisibility="Visible" LoadingRow="DG_LoadingRow">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID"
                             Binding="{Binding Path=IDResouce}"
@@ -25,7 +25,8 @@
                             Binding="{Binding Path=Resource.Name}" 
                                         IsReadOnly="True"/>
                     <DataGridTextColumn Header="Кол-во"
-                            Binding="{Binding Path=Quantity}" />
+                            Binding="{Binding Path=Quantity}" 
+                                        IsReadOnly="False"/>
                 </DataGrid.Columns>
             </DataGrid>
             <WrapPanel Height="50" Background="#FFFFC36A">

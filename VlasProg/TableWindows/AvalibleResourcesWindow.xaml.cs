@@ -32,7 +32,9 @@ namespace VlasProg.TableWindows
             CBSupplier.SelectedIndex = 0;
             CBSupplier.DisplayMemberPath = "Name";
         }
-        public void GetData() => DG.ItemsSource = Context.AvalibleResources.ToList();
+        public void GetData() { DG.ItemsSource = Context.AvalibleResources.ToList();
+
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -68,5 +70,13 @@ namespace VlasProg.TableWindows
         {
             DG.ItemsSource = Context.AvalibleResources.ToList().Where(i => i.Resource.Supplier == CBSupplier.SelectedItem as Supplier);
         }
+
+        private void DG_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            if (Context.AvalibleResources.ToList().ElementAtOrDefault(e.Row.GetIndex()).Quantity > 0) {
+                e.Row.Background = Brushes.Green;
+            }
+        }
+
     }
 }
