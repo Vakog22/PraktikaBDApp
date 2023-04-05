@@ -31,7 +31,6 @@
             <TextBox x:Name="TbLogin"
                  Height="24"
                  Margin="30 0 30 0"
-                 Text="admin"
                  Background="{x:Null}"
                  BorderBrush="{x:Null}"
                      Foreground="White">
@@ -47,7 +46,6 @@
             <PasswordBox x:Name="PbPassword"
                  Height="24"
                  Margin="30 0 30 0"
-                     Password="admin"
                      Background="{x:Null}"
                  BorderBrush="{x:Null}"
                      Foreground="White"/>

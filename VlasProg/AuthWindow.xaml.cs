@@ -77,7 +77,6 @@ namespace VlasProg
         private void GenerateCaptcha() {
             const string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
             TB_Captcha.Text = new string(Enumerable.Repeat(chars, 5).Select(s => s[random.Next(s.Length)]).ToArray());
-            TBX_Captcha.Text = TB_Captcha.Text;
         }
     }
 }
